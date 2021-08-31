@@ -9,10 +9,10 @@ import java.util.List;
 @Service
 public class BookService {
 
-    private final ProjectRepository<Book> bookRepo;
+    private final BookRepository bookRepo;
 
     @Autowired
-    public BookService(ProjectRepository<Book> bookRepo) {
+    public BookService(BookRepository bookRepo) {
         this.bookRepo = bookRepo;
     }
 
@@ -26,5 +26,29 @@ public class BookService {
 
     public boolean removeBookById(Integer bookIdToRemove) {
         return bookRepo.removeItemById(bookIdToRemove);
+    }
+
+    public boolean removeBookByTitle(String bookTitleToRemove) {
+        return bookRepo.removeItemByTitle(bookTitleToRemove);
+    }
+
+    public boolean removeBookByAuthor(String bookAuthorToRemove) {
+        return bookRepo.removeItemByAuthor(bookAuthorToRemove);
+    }
+
+    public boolean removeBookBySize(Integer bookSizeToRemove) {
+        return bookRepo.removeItemBySize(bookSizeToRemove);
+    }
+
+    public List<Book> getBookByTitle(String bookTitleForFilter) {
+        return bookRepo.getItemByTitle(bookTitleForFilter);
+    }
+
+    public List<Book> getBookByAuthor(String bookAuthorForFilter) {
+        return bookRepo.getItemByAuthor(bookAuthorForFilter);
+    }
+
+    public List<Book> getBookBySize(Integer bookSizeForFilter) {
+        return bookRepo.getItemBySize(bookSizeForFilter);
     }
 }

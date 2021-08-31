@@ -6,6 +6,8 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Repository
 public class BookRepository implements ProjectRepository<Book> {
@@ -34,5 +36,84 @@ public class BookRepository implements ProjectRepository<Book> {
             }
         }
         return false;
+    }
+
+    public boolean removeItemByTitle(String bookTitleToRemove) {
+        int count = 0;
+        for (Book book : retreiveAll()) {
+            Pattern pattern = Pattern.compile(bookTitleToRemove);
+            Matcher matcher = pattern.matcher(book.getTitle());
+            if (matcher.find()) {
+                count++;
+                logger.info("remove book completed: " + book);
+                repo.remove(book);
+            }
+        }
+        return count > 0;
+    }
+
+    public boolean removeItemByAuthor(String bookAuthorToRemove) {
+        int count = 0;
+        for (Book book : retreiveAll()) {
+            Pattern pattern = Pattern.compile(bookAuthorToRemove);
+            Matcher matcher = pattern.matcher(book.getTitle());
+            if (matcher.find()) {
+                count++;
+                logger.info("remove book completed: " + book);
+                repo.remove(book);
+            }
+        }
+        return count > 0;
+    }
+
+    public boolean removeItemBySize(Integer bookSizeToRemove) {
+        int count = 0;
+        for (Book book : retreiveAll()) {
+            Pattern pattern = Pattern.compile(String.valueOf(bookSizeToRemove));
+            Matcher matcher = pattern.matcher(String.valueOf(book.getSize()));
+            if (matcher.find()) {
+                count++;
+                logger.info("remove book completed: " + book);
+                repo.remove(book);
+            }
+        }
+        return count > 0;
+    }
+
+
+    public List<Book> getItemByTitle(String bookTitleForFilter) {
+        List<Book> books = new ArrayList<>();
+        for (Book book : repo) {
+            Pattern pattern = Pattern.compile(bookTitleForFilter);
+            Matcher matcher = pattern.matcher(book.getTitle());
+            if (matcher.find()) {
+                books.add(book);
+            }
+        }
+        return books;
+    }
+
+    public List<Book> getItemByAuthor(String bookAuthorForFilter) {
+        List<Book> books = new ArrayList<>();
+        for (Book book : repo) {
+            Pattern pattern = Pattern.compile(bookAuthorForFilter);
+            Matcher matcher = pattern.matcher(book.getAuthor());
+            if (matcher.find()) {
+                books.add(book);
+            }
+        }
+        return books;
+    }
+
+    public List<Book> getItemBySize(Integer bookSizeForFilter) {
+        List<Book> books = new ArrayList<>();
+        for (Book book : repo) {
+            Pattern pattern = Pattern.compile(String.valueOf(bookSizeForFilter));
+            Matcher matcher = pattern.matcher(String.valueOf(book.getSize()));
+            if (matcher.find()) {
+                books.add(book);
+            }
+        }
+        return books;
     }
 }

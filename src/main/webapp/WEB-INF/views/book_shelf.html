@@ -31,17 +31,21 @@
 </head>
 <body>
 <div id="root_container">
+    <div>
+        <a th:href="@{/user/list}">Users</a>
+    </div>
+
     <form method="post" th:action="@{/books/save}" th:object="${book}">
         <table>
             <tr>
                 <td>
-                    <input type="text" placeholder="author" th:field="*{author}">
+                    <input placeholder="author" th:field="*{author}" type="text">
                 </td>
                 <td>
-                    <input type="text" placeholder="book_title" th:field="*{title}">
+                    <input placeholder="book_title" th:field="*{title}" type="text">
                 </td>
                 <td>
-                    <input type="text" placeholder="size (pages)" th:field="*{size}">
+                    <input placeholder="size (pages)" th:field="*{size}" type="text">
                 </td>
                 <td>
                     <input type="submit" value="save">
@@ -50,11 +54,11 @@
         </table>
     </form>
 
-    <form method="post" th:action="@{/books/remove}">
+    <form method="post" th:action="@{/books/remove/id}">
         <table>
             <tr>
                 <td>
-                    <input type="text" placeholder="id number" th:name="bookIdToRemove">
+                    <input placeholder="id number" th:name="bookIdToRemove" type="text">
                 </td>
                 <td>
                     <input type="submit" value="remove">
@@ -63,6 +67,93 @@
         </table>
     </form>
 
+    <form method="post" th:action="@{/books/remove/author}">
+        <table>
+            <tr>
+                <td>
+                    <input placeholder="author" th:name="bookAuthorToRemove" type="text">
+                </td>
+                <td>
+                    <input type="submit" value="remove">
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <form method="post" th:action="@{/books/remove/title}">
+        <table>
+            <tr>
+                <td>
+                    <input placeholder="title" th:name="bookTitleToRemove" type="text">
+                </td>
+                <td>
+                    <input type="submit" value="remove">
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <form method="post" th:action="@{/books/remove/size}">
+        <table>
+            <tr>
+                <td>
+                    <input placeholder="size" th:name="bookSizeToRemove" type="text">
+                </td>
+                <td>
+                    <input type="submit" value="remove">
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <form method="post" th:action="@{/books/filter/author}">
+        <table>
+            <tr>
+                <td>
+                    <input placeholder="author" th:name="bookAuthorToFilter" type="text">
+                </td>
+                <td>
+                    <input type="submit" value="filter">
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <form method="post" th:action="@{/books/filter/title}">
+        <table>
+            <tr>
+                <td>
+                    <input placeholder="title" th:name="bookTitleToFilter" type="text">
+                </td>
+                <td>
+                    <input type="submit" value="filter">
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <form method="post" th:action="@{/books/filter/size}">
+        <table>
+            <tr>
+                <td>
+                    <input placeholder="size" th:name="bookSizeToFilter" type="text">
+                </td>
+                <td>
+                    <input type="submit" value="filter">
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <form method="post" th:action="@{/books/filter/reset}">
+        <table>
+            <tr>
+                <td>
+                    <input type="submit" value="reset filter">
+                </td>
+            </tr>
+        </table>
+    </form>
 
     <table id="books">
         <tr>

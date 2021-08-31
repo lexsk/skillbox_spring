@@ -5,7 +5,7 @@ import java.util.List;
 public interface ProjectRepository<T> {
     List<T> retreiveAll();
 
-    void store(T book);
+    void store(T obj);
 
-    boolean removeItemById(Integer bookIdToRemove);
+    boolean removeItemById(Integer objIdToRemove);
 }

@@ -6,6 +6,10 @@ public class Book {
     private String title;
     private Integer size;
 
+    public boolean isEmpty() {
+        return "".equals(author) && "".equals(title) && size == null;
+    }
+
     public Integer getId() {
         return id;
     }
