@@ -43,68 +43,63 @@ public class BookShelfController {
     }
 
     @PostMapping("/remove/id")
-    public String removeBookById(@RequestParam(value = "bookIdToRemove") Integer bookIdToRemove) {
+    public String removeBookById(@RequestParam(value = "bookIdToRemove") Integer bookIdToRemove, Model model) {
         if (bookService.removeBookById(bookIdToRemove)) {
             logger.info("book id=" + bookIdToRemove + " removed");
         } else {
             logger.info("book id=" + bookIdToRemove + " was NOT removed!");
         }
-        return "redirect:/books/shelf";
+        return books(model);
     }
 
     @PostMapping("/remove/title")
-    public String removeBookByTitle(@RequestParam(value = "bookTitleToRemove") String bookTitleToRemove) {
+    public String removeBookByTitle(@RequestParam(value = "bookTitleToRemove") String bookTitleToRemove, Model model) {
         if (bookService.removeBookByTitle(bookTitleToRemove)) {
             logger.info("books title=" + bookTitleToRemove + " removed");
         } else {
             logger.info("books title=" + bookTitleToRemove + " was NOT removed!");
         }
-        return "redirect:/books/shelf";
+        return books(model);
     }
 
     @PostMapping("/remove/author")
-    public String removeBookByAuthor(@RequestParam(value = "bookAuthorToRemove") String bookAuthorToRemove) {
+    public String removeBookByAuthor(@RequestParam(value = "bookAuthorToRemove") String bookAuthorToRemove, Model model) {
         if (bookService.removeBookByAuthor(bookAuthorToRemove)) {
             logger.info("books Author=" + bookAuthorToRemove + " removed");
         } else {
             logger.info("books Author=" + bookAuthorToRemove + " was NOT removed!");
         }
-        return "redirect:/books/shelf";
+        return books(model);
     }
 
     @PostMapping("/remove/size")
-    public String removeBookBySize(@RequestParam(value = "bookSizeToRemove") Integer bookSizeToRemove) {
+    public String removeBookBySize(@RequestParam(value = "bookSizeToRemove") Integer bookSizeToRemove, Model model) {
         if (bookService.removeBookBySize(bookSizeToRemove)) {
             logger.info("books size=" + bookSizeToRemove + " removed");
         } else {
             logger.info("books size=" + bookSizeToRemove + " was NOT removed!");
         }
-        return "redirect:/books/shelf";
+        return books(model);
     }
 
-    @PostMapping("/filter/title")
-    public String filterBookByTitle(Model model, @RequestParam(value = "bookTitleToFilter") String bookTitleToFilter) {
+    @PostMapping("/filter")
+    public String filterBookByTitle(Model model,
+                                    @RequestParam(value = "titleToFilter", required = false) String titleToFilter,
+                                    @RequestParam(value = "authorToFilter", required = false) String authorToFilter,
+                                    @RequestParam(value = "sizeToFilter", required = false) Integer sizeToFilter
+    ) {
         model.addAttribute("book", new Book());
-        model.addAttribute("bookList", bookService.getBookByTitle(bookTitleToFilter));
+        if (titleToFilter != null && titleToFilter.length() > 0) {
+            model.addAttribute("bookList", bookService.getBookByTitle(titleToFilter));
+
+        } else if (authorToFilter != null && authorToFilter.length() > 0) {
+            model.addAttribute("bookList", bookService.getBookByAuthor(authorToFilter));
+
+        } else if (sizeToFilter != null) {
+            model.addAttribute("bookList", bookService.getBookBySize(sizeToFilter));
+        }
+
         return "book_shelf";
     }
 
-    @PostMapping("/filter/author")
-    public String filterBookByAuthor(Model model, @RequestParam(value = "bookAuthorToFilter") String bookAuthorToFilter) {
-        model.addAttribute("book", new Book());
-        model.addAttribute("bookList", bookService.getBookByAuthor(bookAuthorToFilter));
-        return "book_shelf";
-    }
-
-    @PostMapping("/filter/size")
-    public String filterBookBySize(Model model, @RequestParam(value = "bookSizeToFilter") Integer bookSizeToFilter) {
-        model.addAttribute("book", new Book());
-        model.addAttribute("bookList", bookService.getBookBySize(bookSizeToFilter));
-        return "book_shelf";
-    }
-
-    @PostMapping("/filter/reset")
-    public String resetFilter() {
-        return "redirect:/books/shelf";
-    }
 }

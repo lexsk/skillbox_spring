@@ -106,11 +106,27 @@
         </table>
     </form>
 
-    <form method="post" th:action="@{/books/filter/author}">
+    <form method="post" th:action="@{/books/filter}">
         <table>
             <tr>
                 <td>
-                    <input placeholder="author" th:name="bookAuthorToFilter" type="text">
+                    <input placeholder="author" th:name="authorToFilter" type="text">
+                </td>
+                <td>
+                    <input type="submit" value="filter">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input placeholder="title" th:name="titleToFilter" type="text">
+                </td>
+                <td>
+                    <input type="submit" value="filter">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input placeholder="size" th:name="sizeToFilter" type="text">
                 </td>
                 <td>
                     <input type="submit" value="filter">
@@ -119,33 +135,7 @@
         </table>
     </form>
 
-    <form method="post" th:action="@{/books/filter/title}">
-        <table>
-            <tr>
-                <td>
-                    <input placeholder="title" th:name="bookTitleToFilter" type="text">
-                </td>
-                <td>
-                    <input type="submit" value="filter">
-                </td>
-            </tr>
-        </table>
-    </form>
-
-    <form method="post" th:action="@{/books/filter/size}">
-        <table>
-            <tr>
-                <td>
-                    <input placeholder="size" th:name="bookSizeToFilter" type="text">
-                </td>
-                <td>
-                    <input type="submit" value="filter">
-                </td>
-            </tr>
-        </table>
-    </form>
-
-    <form method="post" th:action="@{/books/filter/reset}">
+    <form method="get" th:action="@{/books/shelf}">
         <table>
             <tr>
                 <td>

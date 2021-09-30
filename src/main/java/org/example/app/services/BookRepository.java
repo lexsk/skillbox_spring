@@ -40,8 +40,8 @@ public class BookRepository implements ProjectRepository<Book> {
 
     public boolean removeItemByTitle(String bookTitleToRemove) {
         int count = 0;
+        Pattern pattern = Pattern.compile(bookTitleToRemove);
         for (Book book : retreiveAll()) {
-            Pattern pattern = Pattern.compile(bookTitleToRemove);
             Matcher matcher = pattern.matcher(book.getTitle());
             if (matcher.find()) {
                 count++;
@@ -54,8 +54,8 @@ public class BookRepository implements ProjectRepository<Book> {
 
     public boolean removeItemByAuthor(String bookAuthorToRemove) {
         int count = 0;
+        Pattern pattern = Pattern.compile(bookAuthorToRemove);
         for (Book book : retreiveAll()) {
-            Pattern pattern = Pattern.compile(bookAuthorToRemove);
             Matcher matcher = pattern.matcher(book.getTitle());
             if (matcher.find()) {
                 count++;
@@ -68,8 +68,8 @@ public class BookRepository implements ProjectRepository<Book> {
 
     public boolean removeItemBySize(Integer bookSizeToRemove) {
         int count = 0;
+        Pattern pattern = Pattern.compile(String.valueOf(bookSizeToRemove));
         for (Book book : retreiveAll()) {
-            Pattern pattern = Pattern.compile(String.valueOf(bookSizeToRemove));
             Matcher matcher = pattern.matcher(String.valueOf(book.getSize()));
             if (matcher.find()) {
                 count++;
@@ -83,8 +83,8 @@ public class BookRepository implements ProjectRepository<Book> {
 
     public List<Book> getItemByTitle(String bookTitleForFilter) {
         List<Book> books = new ArrayList<>();
+        Pattern pattern = Pattern.compile(bookTitleForFilter);
         for (Book book : repo) {
-            Pattern pattern = Pattern.compile(bookTitleForFilter);
             Matcher matcher = pattern.matcher(book.getTitle());
             if (matcher.find()) {
                 books.add(book);
@@ -95,8 +95,8 @@ public class BookRepository implements ProjectRepository<Book> {
 
     public List<Book> getItemByAuthor(String bookAuthorForFilter) {
         List<Book> books = new ArrayList<>();
+        Pattern pattern = Pattern.compile(bookAuthorForFilter);
         for (Book book : repo) {
-            Pattern pattern = Pattern.compile(bookAuthorForFilter);
             Matcher matcher = pattern.matcher(book.getAuthor());
             if (matcher.find()) {
                 books.add(book);
@@ -107,8 +107,8 @@ public class BookRepository implements ProjectRepository<Book> {
 
     public List<Book> getItemBySize(Integer bookSizeForFilter) {
         List<Book> books = new ArrayList<>();
+        Pattern pattern = Pattern.compile(String.valueOf(bookSizeForFilter));
         for (Book book : repo) {
-            Pattern pattern = Pattern.compile(String.valueOf(bookSizeForFilter));
             Matcher matcher = pattern.matcher(String.valueOf(book.getSize()));
             if (matcher.find()) {
                 books.add(book);
