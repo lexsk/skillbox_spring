@@ -2,6 +2,9 @@ package org.example.app.services;
 
 import org.apache.log4j.Logger;
 import org.example.web.dto.Book;
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -10,10 +13,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Repository
-public class BookRepository implements ProjectRepository<Book> {
+public class BookRepository implements ProjectRepository<Book>, ApplicationContextAware {
 
     private final Logger logger = Logger.getLogger(BookRepository.class);
     private final List<Book> repo = new ArrayList<>();
+    private ApplicationContext context;
 
     @Override
     public List<Book> retreiveAll() {
@@ -22,7 +26,7 @@ public class BookRepository implements ProjectRepository<Book> {
 
     @Override
     public void store(Book book) {
-        book.setId(book.hashCode());
+        book.setId(context.getBean(IdProvider.class).provideId(book));
         logger.info("store new book: " + book);
         repo.add(book);
     }
@@ -56,7 +60,7 @@ public class BookRepository implements ProjectRepository<Book> {
         int count = 0;
         Pattern pattern = Pattern.compile(bookAuthorToRemove);
         for (Book book : retreiveAll()) {
-            Matcher matcher = pattern.matcher(book.getTitle());
+            Matcher matcher = pattern.matcher(book.getAuthor());
             if (matcher.find()) {
                 count++;
                 logger.info("remove book completed: " + book);
@@ -115,5 +119,10 @@ public class BookRepository implements ProjectRepository<Book> {
             }
         }
         return books;
+    }
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        this.context = applicationContext;
     }
 }

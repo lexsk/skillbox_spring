@@ -1,0 +1,62 @@
+<!DOCTYPE web-app PUBLIC
+        "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+        "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<!--дескриптор web проекта-->
+
+<web-app>
+    <display-name>Archetype Created Web Application</display-name>
+
+    <!--
+    в WebInitializer
+    XmlWebApplicationContext appContext = new XmlWebApplicationContext();
+    appContext.setConfigLocation("classpath:app-config.xml");
+    servletContext.addListener(new ContextLoaderListener(appContext));
+
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:app-config.xml</param-value> &lt;!&ndash; конфигурации бинов для root контекста &ndash;&gt;
+    </context-param>
+
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>-->
+
+
+
+    <!--
+    Spring MVC — приложение, построенное вокруг центрального
+    сервлета — DispatcherServlet, который направляет входящие запросы
+    к соответствующим контроллерам, реализуя таким образом общий
+    для многих популярных web-фреймворков шаблон
+    проектирования — Front Controller
+    -->
+
+    <!--
+    в WebInitializer
+    XmlWebApplicationContext webContext = new XmlWebApplicationContext();
+    webContext.setConfigLocation("classpath:web-config.xml");
+    DispatcherServlet dispatcherServlet = new DispatcherServlet(webContext);
+    ServletRegistration.Dynamic dispatcher = servletContext.addServlet("dispatcher", dispatcherServlet);
+    dispatcher.setLoadOnStartup(1);
+    dispatcher.addMapping("/");
+
+    &lt;!&ndash;  блок в котором мы определяем dispatcher servlet&ndash;&gt;
+    <servlet>
+        <servlet-name>my-dispatcher-servlet</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:web-config.xml</param-value> &lt;!&ndash; тут будут содержаться web специфические бины &ndash;&gt;
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>my-dispatcher-servlet</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>-->
+
+    <!-- больше не используется можно удалить. Переименован в UNUSED_web.xml_ -->
+
+</web-app>
