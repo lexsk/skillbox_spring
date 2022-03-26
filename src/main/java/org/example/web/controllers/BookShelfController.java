@@ -106,6 +106,7 @@ public class BookShelfController {
                                     @RequestParam(value = "sizeToFilter", required = false) Integer sizeToFilter
     ) {
         model.addAttribute("book", new Book());
+        model.addAttribute("bookIdToRemove", new BookIdToRemove());
         if (titleToFilter != null && titleToFilter.length() > 0) {
             model.addAttribute("bookList", bookService.getBookByTitle(titleToFilter));
 

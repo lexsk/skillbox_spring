@@ -18,26 +18,15 @@ public class UserService {
         this.userRepo = userRepo;
     }
 
-    public boolean authenticate(User user) {
-        logger.info("try auth with user-form: " + user);
-        for (User currentUser : userRepo.retreiveAll()) {
-            if (currentUser.getUsername().equals(user.getUsername())
-                    && currentUser.getPassword().equals(user.getPassword())) {
-                return true;
-            }
-        }
-        return user.getUsername().equals("root") && user.getPassword().equals("123");
-    }
-
     public List<User> getAllUsers() {
-        return userRepo.retreiveAll();
+        return userRepo.retrieveAll();
     }
 
     public void saveUser(User user) {
         userRepo.store(user);
     }
 
-    public boolean removeUserById(String userIdToRemove) {
+    public boolean removeUserById(Integer userIdToRemove) {
         return userRepo.removeItemById(userIdToRemove);
     }
 }

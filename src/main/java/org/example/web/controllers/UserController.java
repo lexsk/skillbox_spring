@@ -21,30 +21,12 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/login")
-    public String login(Model model) {
-        logger.info("GET /login returns login_page.html");
-        model.addAttribute("loginForm", new User());
-        return "login_page";
-    }
-
     @GetMapping("/list")
     public String list(Model model) {
         logger.info("GET /login returns login_page.html");
         model.addAttribute("user", new User());
         model.addAttribute("userList", userService.getAllUsers());
         return "users";
-    }
-
-    @PostMapping("/auth")
-    public String authenticate(User user) throws BookShelfLoginException {
-        if (userService.authenticate(user)) {
-            logger.info("login OK redirect to book shelf");
-            return "redirect:/books/shelf";
-        } else {
-            logger.info("login FAIL redirect back to login");
-            throw new BookShelfLoginException("Неверный логин или пароль");
-        }
     }
 
     @PostMapping("/save")
@@ -59,7 +41,7 @@ public class UserController {
     }
 
     @PostMapping("/remove")
-    public String removeBook(@RequestParam(value = "userIdToRemove") String userIdToRemove, Model model) {
+    public String removeBook(@RequestParam(value = "userIdToRemove") Integer userIdToRemove, Model model) {
         if (userService.removeUserById(userIdToRemove)) {
             logger.info("book id=" + userIdToRemove + " removed");
         } else {

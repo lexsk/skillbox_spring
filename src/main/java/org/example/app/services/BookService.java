@@ -17,14 +17,14 @@ public class BookService {
     }
 
     public List<Book> getAllBooks() {
-        return bookRepo.retreiveAll();
+        return bookRepo.retrieveAll();
     }
 
     public void saveBook(Book book) {
         bookRepo.store(book);
     }
 
-    public boolean removeBookById(String bookIdToRemove) {
+    public boolean removeBookById(Integer bookIdToRemove) {
         return bookRepo.removeItemById(bookIdToRemove);
     }
 
