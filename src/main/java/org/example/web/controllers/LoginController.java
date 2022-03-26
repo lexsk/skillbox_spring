@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 // HTTP-методы GET, POST, PUT, DELETE, HEAD, OPTIONS
@@ -44,7 +43,7 @@ public class LoginController {
         return "login_page";
     }
 
-    @PostMapping("/auth")
+    /*@PostMapping("/auth")
     public String authenticate(LoginForm loginFrom) {
         if (loginService.authenticate(loginFrom)) {
             logger.info("login OK redirect to book shelf");
@@ -53,5 +52,5 @@ public class LoginController {
             logger.info("login FAIL redirect back to login");
             return "redirect:/login";
         }
-    }
+    }*/
 }

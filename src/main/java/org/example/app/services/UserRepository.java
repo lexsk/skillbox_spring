@@ -20,13 +20,13 @@ public class UserRepository implements ProjectRepository<User> {
 
     @Override
     public void store(User user) {
-        user.setId(user.hashCode());
+        user.setId(String.valueOf(user.hashCode()));
         logger.info("store new book: " + user);
         repo.add(user);
     }
 
     @Override
-    public boolean removeItemById(Integer userIdToRemove) {
+    public boolean removeItemById(String userIdToRemove) {
         for (User user : retreiveAll()) {
             if (user.getId().equals(userIdToRemove)) {
                 logger.info("remove book completed: " + user);

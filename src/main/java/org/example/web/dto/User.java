@@ -5,7 +5,7 @@ import org.apache.log4j.Logger;
 public class User {
     private Logger logger = Logger.getLogger(User.class);
 
-    private Integer id;
+    private String id;
     private String username;
     private String password;
 
@@ -21,11 +21,11 @@ public class User {
         return "".equals(username) && "".equals(password);
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
