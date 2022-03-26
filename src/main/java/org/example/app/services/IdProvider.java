@@ -96,21 +96,23 @@ public class IdProvider implements InitializingBean, DisposableBean, BeanPostPro
 
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
+        logger.info("IdProvider. postProcessBeforeInitialization");
         return null;
     }
 
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
+        logger.info("IdProvider. postProcessAfterInitialization");
         return null;
     }
 
     @PostConstruct
     public void postConstructIdProvider() {
-
+        logger.info("IdProvider. postConstructIdProvider");
     }
 
     @PreDestroy
     public void preDestroyIdProvider() {
-
+        logger.info("IdProvider. preDestroyIdProvider");
     }
 }
