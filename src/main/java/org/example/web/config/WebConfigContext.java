@@ -3,6 +3,7 @@ package org.example.web.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -47,6 +48,13 @@ public class WebConfigContext implements WebMvcConfigurer {
         viewResolver.setOrder(1); // <property name="order" value="1"/>
         viewResolver.setCharacterEncoding("UTF-8"); // <property name="characterEncoding" value="UTF-8"/>
         return viewResolver;
+    }
+
+    @Bean
+    public CommonsMultipartResolver multipartResolver() {
+        CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
+        multipartResolver.setMaxUploadSize(5000000); //5mb
+        return multipartResolver;
     }
 
 }
