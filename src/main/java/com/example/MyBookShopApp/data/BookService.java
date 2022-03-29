@@ -18,17 +18,18 @@ public class BookService {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public List<Book> getBooksData(){
+    public List<Book> getBooksData() {
 
-        List<Book> books = jdbcTemplate.query("SELECT * FROM books", (ResultSet rs, int rownum)->{
-            Book book = new Book();
-            book.setId(rs.getInt("id"));
-            book.setAuthor(rs.getString("author"));
-            book.setTitle(rs.getString("title"));
-            book.setPriceOld(rs.getString("priceOld"));
-            book.setPrice(rs.getString("price"));
-            return book;
-        });
+        List<Book> books = jdbcTemplate.query("SELECT b.id, a.author, b.title, b.priceOld, b.price FROM books b, authors a WHERE a.id = b.author_id",
+                (ResultSet rs, int rownum) -> {
+                    Book book = new Book();
+                    book.setId(rs.getInt("id"));
+                    book.setAuthor(rs.getString("author"));
+                    book.setTitle(rs.getString("title"));
+                    book.setPriceOld(rs.getString("priceOld"));
+                    book.setPrice(rs.getString("price"));
+                    return book;
+                });
         return new ArrayList<>(books);
     }
 }
