@@ -20,7 +20,7 @@ public class BookService {
 
     public List<Book> getBooksData() {
 
-        List<Book> books = jdbcTemplate.query("SELECT b.id, a.author, b.title, b.priceOld, b.price FROM books b, authors a WHERE a.id = b.author_id",
+        List<Book> books = jdbcTemplate.query("SELECT * FROM books b",
                 (ResultSet rs, int rownum) -> {
                     Book book = new Book();
                     book.setId(rs.getInt("id"));
