@@ -19,8 +19,8 @@ public class AuthorService {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public Map<String, List<Author>> getAuthorsMap(){
-        List<Author> authots = jdbcTemplate.query("SELECT * FROM authors", (ResultSet rs, int rownum)->{
+    public Map<String, List<Author>> getAuthorsMap() {
+        List<Author> authors = jdbcTemplate.query("SELECT * FROM authors",(ResultSet rs, int rowNum) -> {
             Author author = new Author();
             author.setId(rs.getInt("id"));
             author.setFirstName(rs.getString("first_name"));
@@ -28,6 +28,6 @@ public class AuthorService {
             return author;
         });
 
-        return authots.stream().collect(Collectors.groupingBy((Author a)->{return a.getLastName().substring(0,1);}));
+        return authors.stream().collect(Collectors.groupingBy((Author a) -> {return a.getLastName().substring(0,1);}));
     }
 }
